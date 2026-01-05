@@ -65,7 +65,30 @@ git branch
 git branch -r
 ```
 
-### Flujo completo típico
+### Traer cambios del repositorio remoto
+
+```bash
+# Traer y fusionar cambios del repositorio remoto (recomendado)
+git pull origin main              # Trae cambios y los fusiona automáticamente
+git pull                          # Trae cambios de la rama actual
+
+# Solo traer cambios sin fusionar (para revisar primero)
+git fetch origin                  # Trae todos los cambios del remoto
+git fetch origin main             # Trae cambios de una rama específica
+
+# Ver qué cambios hay en el remoto sin aplicarlos
+git fetch
+git log HEAD..origin/main         # Ver commits que están en remoto pero no localmente
+git diff HEAD..origin/main        # Ver diferencias entre local y remoto
+
+# Actualizar todas las ramas remotas
+git fetch --all
+
+# Ver información sobre el remoto
+git remote -v                     # Ver repositorios remotos configurados
+```
+
+### Flujo completo típico para hacer push
 
 ```bash
 # 1. Ver qué cambió
@@ -82,6 +105,25 @@ git commit -m "Descripción de los cambios realizados"
 
 # 5. Hacer push
 git push origin main
+```
+
+### Flujo completo típico para traer cambios
+
+```bash
+# 1. Ver el estado actual
+git status
+
+# 2. Traer cambios del remoto (opción 1: pull directo)
+git pull origin main
+
+# O bien (opción 2: fetch primero para revisar)
+git fetch origin
+git log HEAD..origin/main         # Ver qué cambios hay
+git pull origin main              # Fusionar los cambios
+
+# 3. Si hay conflictos, resolverlos y luego:
+git add .
+git commit -m "Resuelve conflictos"
 ```
 
 ## Deploy on Vercel
