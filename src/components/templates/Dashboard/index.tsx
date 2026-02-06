@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { BtnAction } from "@/components/atoms";
 import { CardUser, Header, Navbar } from "@/components/organisms";
+import { GrAddCircle } from "react-icons/gr";
 
 export const TempleDashboard = () => {
   const router = useRouter();
@@ -11,6 +12,7 @@ export const TempleDashboard = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -128,8 +130,21 @@ export const TempleDashboard = () => {
             <BtnAction
               variant="primary"
               className={`d-flex align-items-center justify-content-center gap-2 ${isMobile ? "w-100" : ""}`}
+              style={{
+                backgroundColor: isHovered ? "#E6175C" : "#ffffff",
+                border: "2px solid #E6175C",
+                borderRadius: "12px",
+                color: isHovered ? "#ffffff" : "#E6175C",
+                transition: "all 0.3s ease",
+              }}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
-              <span>➕</span>
+              <GrAddCircle 
+                size={20} 
+                color={isHovered ? "#ffffff" : "#E6175C"} 
+                style={{ transition: "color 0.3s ease" }} 
+              />
               <span>{isMobile ? "Agregar" : "Agregar usuario"}</span>
             </BtnAction>
           }

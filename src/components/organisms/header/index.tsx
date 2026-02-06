@@ -2,6 +2,7 @@
 
 import { ImSearch } from "@/components/atoms/icons";
 import { BtnAction } from "@/components/atoms";
+import { IoMdNotifications } from "react-icons/io";
 
 export interface HeaderUser {
   name: string;
@@ -116,9 +117,21 @@ export const Header = ({
           }}
         >
           {!isMobile && (
-            <span style={{ fontSize: "20px", cursor: "pointer" }} aria-hidden>
-              🔔
-            </span>
+            <div
+              style={{
+                width: "34px",
+                height: "34px",
+                borderRadius: "50%",
+                border: "2px solid #E6175C",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
+              aria-hidden
+            >
+              <IoMdNotifications size={30} color="#E6175C" />
+            </div>
           )}
           <div
             style={{
@@ -219,7 +232,16 @@ export const Header = ({
             </BtnAction>
           )}
         </div>
-        {rightAction}
+        {rightAction && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            {rightAction}
+          </div>
+        )}
       </div>
     </header>
   );
