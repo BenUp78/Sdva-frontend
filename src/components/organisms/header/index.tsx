@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { ImSearch } from "@/components/atoms/icons";
 import { BtnAction } from "@/components/atoms";
 import { IoMdNotifications } from "react-icons/io";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 export interface HeaderUser {
   name: string;
@@ -43,6 +44,7 @@ export const Header = ({
   rightAction,
 }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
@@ -176,6 +178,53 @@ export const Header = ({
             gap: isMobile ? "8px" : "12px",
           }}
         >
+          <button
+            type="button"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            style={{
+              position: "relative",
+              background: isDarkMode ? "#333" : "#fff",
+              border: "1px solid #e0e0e0",
+              borderRadius: "50%",
+              width: "34px",
+              height: "34px",
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: 0,
+              transition: "background-color 0.3s ease",
+              overflow: "hidden",
+            }}
+            aria-label="Alternar tema"
+          >
+            <div
+              style={{
+                position: "absolute",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "transform 0.5s ease, opacity 0.5s ease",
+                transform: isDarkMode ? "rotate(0deg) scale(1)" : "rotate(90deg) scale(0)",
+                opacity: isDarkMode ? 1 : 0,
+              }}
+            >
+              <FaMoon color="white" size={16} />
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "transform 0.5s ease, opacity 0.5s ease",
+                transform: isDarkMode ? "rotate(-90deg) scale(0)" : "rotate(0deg) scale(1)",
+                opacity: isDarkMode ? 0 : 1,
+              }}
+            >
+              <FaSun color="black" size={16} />
+            </div>
+          </button>
           {!isMobile && (
             <div
               style={{
